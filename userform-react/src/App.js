@@ -1,15 +1,26 @@
-import logo from "./logo.svg";
 import "./App.css";
+
+const formStorage = async function (e) {
+  e.preventDefault();
+  console.log(e.target);
+  const res = await fetch("/", {
+    method: "post",
+    body: JSON.stringify({ data: "some Information" }),
+    headers: { "content-type": "application-json" },
+  });
+  const cl = await res.json();
+  console.log(cl);
+};
 
 function App() {
   return (
     <div className="App">
-      <form autocomplete="off" method="post">
+      <form method="post">
         <fieldset>
           <legend>UserForm</legend>
-          <label htmlFor="" type="text">
+          <label htmlFor="name" type="text">
             Name:
-            <input />
+            <input name="name" />
           </label>
           <br />
           <label htmlFor="" type="email">
@@ -77,7 +88,8 @@ function App() {
             <input type="color" />
           </label>
           <br />
-          <input type="submit" />
+
+          <input type="submit" onClick={formStorage} />
         </fieldset>
       </form>
     </div>
