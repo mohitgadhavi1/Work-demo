@@ -31,14 +31,14 @@ function App() {
   };
   const getDataJokes = () => {
     sendHttpReq("GET", `https://api.chucknorris.io/jokes/random?category=${selectCategory}`).then((resData) => {
-      console.log({...displayJokes,...resData})
+  
       setDisplayJokes({...displayJokes,...resData});
     });
   };
 
   let clickCategory =(e)=>{
     e.preventDefault()
-    console.log(e.target.innerHTML);
+   
     setSelectCategory(e.target.innerHTML)
     console.log(`https://api.chucknorris.io/jokes/random?category=${selectCategory}`)
   }
@@ -53,8 +53,10 @@ getDataJokes()
 
   return (
     <div className="App">
-      {displayCategories && <div> <h1>Assignment by <span> Mohit Gadhavi </span> </h1>
-      <div className='container'>
+       <h1>Assignment by <span> Mohit Gadhavi </span> </h1>
+      <button onClick={()=>{
+        setSelectCategory(displayCategories[Math.floor(Math.random() * displayCategories.length)]) ;}}>New Joke</button>
+      {displayCategories && <div><div className='container'>
      {displayCategories.map(category=> {
        
        return <p key={displayCategories.indexOf(category)} href='' onClick={clickCategory
